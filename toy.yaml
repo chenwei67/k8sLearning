@@ -1,13 +1,17 @@
 apiVersion: v1
-kind: Pod
+kind: pod
 metadata:
-  name: deployment-toy
+  name: toy-liveness
   labels:
     project: toy
 spec:
   containers:
-  - image: chenwei67/toy
-    name: toy
+  - image: chenwei67/toy-liveness
     ports:
     - containerPort: 8080
       protocol: TCP
+    livenessPod:
+      httpGet:
+        path: /
+        port: 8080
+

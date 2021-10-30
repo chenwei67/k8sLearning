@@ -7,7 +7,13 @@ import (
 	"os"
 )
 
+var cnt int
 func handler(w http.ResponseWriter, r *http.Request) {
+	cnt++
+	if cnt%3 == 2{
+		http.Error(w, "no resp", http.StatusInternalServerError)
+		return
+	}
 	fmt.Printf("Received from %s\n", r.RemoteAddr)
 	hostname, err := os.Hostname()
 	if err != nil {
