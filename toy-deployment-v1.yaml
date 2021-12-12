@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: toy-errors
+spec:
+  selector:
+    matchLabels:
+      app: toy
+  replicas: 3
+  template:
+    metadata:
+      name: toy
+      labels:
+        app: toy
+    spec:
+      containers:
+      - image: chenwei67/toy-error
+        name: toy
+        imagePullPolicy: IfNotPresent

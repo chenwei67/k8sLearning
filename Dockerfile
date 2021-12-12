@@ -1,5 +1,5 @@
-FROM golang:1.16-buster
-COPY aaa /data/
+FROM golang:1.16
+COPY ./ /data/
 WORKDIR /data/
 
 RUN go mod download -x

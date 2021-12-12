@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+
+metadata:
+  name: toy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      project: toy
+  template:
+    metadata:
+      labels:
+        project: toy
+    spec:
+      containers:
+      - name: toy
+        image: chenwei67/toy
+        ports:
+        - name: http
+          containerPort: 8080
+        - name: https
+          containerPort: 8443
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8080
