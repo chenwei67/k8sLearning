@@ -1,12 +1,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: toy-errors
+  name: toy
 spec:
   selector:
     matchLabels:
       app: toy
   replicas: 3
+  minReadySeconds: 10
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
   template:
     metadata:
       name: toy
@@ -16,4 +21,9 @@ spec:
       containers:
       - image: chenwei67/toy-error
         name: toy
+        readinessProbe:
+          periodSeconds: 1
+          httGet:
+            path: /
+            port: 8080
         imagePullPolicy: IfNotPresent
